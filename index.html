@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AgriTech</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<style>
+    /* styles.css */
+body, html {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+}
+
+/* Navigation Bar */
+header {
+    position: fixed;
+    width: 100%;
+    background: black;
+    padding: 15px 0;
+    transition: background-color 0.3s ease-in-out, padding 0.3s ease-in-out;
+    z-index: 1000;
+}
+
+nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 90%;
+    margin: auto;
+}
+
+.logo {
+    color: white;
+    font-size: 24px;
+    font-weight: bold;
+}
+
+nav ul {
+    list-style: none;
+    display: flex;
+    gap: 20px;
+}
+
+nav ul li {
+    display: inline;
+}
+
+nav ul li a {
+    color: white;
+    text-decoration: none;
+    font-size: 20px;
+    position: relative;
+    transition: color 0.3s ease-in-out;
+}
+
+/* Underline animation */
+nav ul li a::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: -5px;
+    width: 100%;
+    height: 3px;
+    background: #28a745;
+    transform: scaleX(0);
+    transition: transform 0.3s ease-in-out;
+}
+
+nav ul li a:hover {
+    color: #28a745;
+}
+
+nav ul li a:hover::after {
+    transform: scaleX(1);
+}
+
+/* Shrinking Navbar on Scroll */
+.scrolled {
+    padding: 10px 0;
+    background: rgba(0, 0, 0, 0.9);
+}
+
+.hero {
+    height: 100vh;
+    background: url('pic1.jpg') no-repeat center center/cover;
+    display: flex;
+    align-items: center;
+    justify-content: right;
+    text-align: center;
+    color: white;
+    padding: 20px;
+}
+
+.hero-content {
+    max-width: 600px;
+}
+
+.hero h1 {
+    color: black;
+    font-size: 48px;
+    margin-bottom: 10px;
+}
+
+.hero p {
+    color: black;
+    font-size: 20px;
+    margin-bottom: 20px;
+}
+
+.btn {
+    background: #28a745;
+    color: white;
+    padding: 12px 20px;
+    text-decoration: none;
+    font-size: 18px;
+    border-radius: 5px;
+    transition: 0.3s;
+}
+
+.btn:hover {
+    background: #218838;
+}
+
+.about {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 50px;
+    background: #f4f4f4;
+}
+
+.about-container {
+    display: flex;
+    max-width: 1100px;
+    width: 90%;
+    align-items: center;
+    justify-content: space-between;
+    gap: 50px;
+}
+
+.about-image img {
+    border: solid 5px black;
+    width: 350px;
+    height: 350px;
+    border-radius: 10%;
+    transition: transform 0.3s ease-in-out;
+}
+
+.about-image img:hover {
+    transform: scale(1.1);
+}
+
+.about-content {
+    max-width: 700px; /* Increased from 500px */
+    width: 100%; /* Ensures it takes full available space */
+}
+
+.about-content h2 {
+    font-size: 28px;
+    margin-bottom: 10px;
+}
+
+.about-content p {
+    margin-top: 20px;
+    margin-bottom: 30px;
+    display: flex;
+    justify-content: center;
+    text-align: justify;
+    font-size: 18px;
+    line-height: 1.6; /* Slightly increased for better readability */
+}
+
+.faq {
+    padding: 50px;
+    background: #ffffff;
+    text-align: center;
+}
+
+.faq h2 {
+    font-size: 28px;
+    margin-bottom: 20px;
+}
+
+.faq-container {
+    max-width: 800px;
+    margin: auto;
+    text-align: left;
+}
+
+.faq-item {
+    background: #f8f9fa;
+    border: 1px solid #ddd;
+    padding: 15px;
+    border-radius: 8px;
+    margin-bottom: 15px;
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+}
+
+.faq-item h3 {
+    font-size: 20px;
+    margin: 0;
+}
+
+.faq-item p {
+    display: none;
+    font-size: 16px;
+    line-height: 1.5;
+    margin-top: 10px;
+    transition: all 0.3s ease-in-out;
+}
+
+.faq-item:hover {
+    background: #e9ecef;
+}
+
+.faq-item.active p {
+    display: block;
+}
+
+
+
+/* Team Section */
+.team {
+    padding: 50px;
+    background: black;
+    color: white;
+    text-align: center;
+}
+
+.team h2 {
+    font-size: 28px;
+    margin-bottom: 20px;
+}
+
+.team-container {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+}
+
+.team-member {
+    text-align: center;
+}
+
+.team-member img {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    transition: transform 0.3s ease-in-out;
+}
+
+.team-member img:hover {
+    transform: scale(1.1);
+}
+
+.team-member h3 {
+    font-size: 20px;
+    margin-top: 10px;
+}
+</style>
+<body>
+    <header>
+        <nav>
+            <div class="logo">Crop Disease Detection</div>
+            <ul>
+                <li><a href="#home">Home</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#faqs">FAQs</a></li>
+                <li><a href="#team">Teams</a></li>
+            </ul>
+        </nav>
+    </header>
+    
+    <section class="hero" id="home">
+        <div class="hero-content">
+            <h1>Innovating Agriculture with Technology</h1>
+            <p>Empowering farmers with smart solutions for a sustainable future.</p>
+            <a href="#" class="btn">Explore Projects</a>
+        </div>
+    </section>
+
+
+    
+    <section class="about" id="about">
+        <div class="about-container">
+            <div class="about-image">
+                <img src="pic2.jpg" alt="User Profile">
+            </div>
+            <div class="about-content">
+                <h2>About CDD</h2>
+                <p>Crop disease Detection is a crucial aspect of modern agriculture, leveraging AI and machine learning to detect and prevent plant diseases before they spread. By analyzing images, environmental conditions, and historical data, AI-powered models can accurately identify diseases and recommend effective treatments.</p>
+                    <br>
+                    <p>This technology helps farmers reduce crop losses, optimize resource use, and enhance food security. As someone passionate about revolutionizing agriculture through technology, I aim to develop innovative solutions that empower farmers with intelligent disease detection systems, ensuring a healthier and more sustainable agricultural future.</p>
+                <br>
+                <p>With the integration of remote sensing, IoT devices, and real-time monitoring systems, AI-driven crop disease prediction can further enhance precision agriculture. These technologies provide continuous data streams, allowing for early intervention and better decision-making. By adopting these advancements, farmers can move toward more efficient and environmentally friendly farming practices, ultimately improving global food production and resilience against agricultural challenges.
+
+                    This new paragraph highlights the role of advanced technologies like IoT and remote sensing in improving disease prediction. Let me know if you need any tweaks! 🚀</p>
+            </div>
+        </div>
+    </section>
+    <section class="faq" id="faqs">
+        <h2>Frequently Asked Questions</h2>
+        <div class="faq-container">
+            <div class="faq-item">
+                <h3>What is crop disease detection?</h3>
+                <p>Crop disease detection involves using technology, including AI and machine learning, to identify plant diseases at an early stage, helping farmers take timely action to protect their crops.</p>
+            </div>
+
+            <div class="faq-item">
+                <h3>How does AI help in detecting crop diseases?</h3>
+                <p>AI-powered models analyze images of crops, environmental conditions, and historical data to accurately detect diseases and suggest treatments. These models can quickly identify patterns that might be missed by the human eye.</p>
+            </div>
+
+            <div class="faq-item">
+                <h3>What types of data are used for disease detection?</h3>
+                <p>Data sources include images of infected crops These inputs help AI models make accurate predictions.</p>
+            </div>
+
+
+            <div class="faq-item">
+                <h3>How accurate are AI-based disease detection models?</h3>
+                <p>The accuracy depends on the quality and quantity of training data. Well-trained models can achieve over 90% accuracy in identifying common crop diseases.</p>
+            </div>
+
+            <div class="faq-item">
+                <h3>What are the benefits of early disease detection?</h3>
+                <p>Early detection helps reduce crop losses, minimizes the need for excessive pesticide use, and improves overall agricultural productivity by allowing timely intervention.</p>
+            </div>
+
+            <div class="faq-item">
+                <h3>Is crop disease detection affordable for small farmers?</h3>
+                <p>Many free or low-cost mobile apps and cloud-based AI tools are available, making crop disease detection accessible even to small-scale farmers.</p>
+            </div>
+
+            <div class="faq-item">
+                <h3>What are the future advancements in crop disease detection?</h3>
+                <p>Future advancements include drone-based surveillance, IoT sensors for real-time monitoring, and AI models that can provide treatment recommendations tailored to specific farm conditions.</p>
+            </div>
+
+            
+        </div>
+    </section>
+
+    <section class="team" id="team">
+        <h2>Meet Our Team</h2>
+        <div class="team-container">
+            <div class="team-member">
+                <img src="karthik.jpg" alt="Team Member 1">
+                <h3>Karthik B</h3>
+                <p>Project Owner</p>
+            </div>
+            <div class="team-member">
+                <img src="manoj.jpg" alt="Team Member 2">
+                <h3>Manoj S Naik</h3>
+                <p>Developer</p>
+            </div>
+            <div class="team-member">
+                <img src="Maruthi.jpg" alt="Team Member 2">
+                <h3>Maruthi Reddy</h3>
+                <p>Tester</p>
+            </div>
+            <div class="team-member">
+                <img src="Gemini.jpg" alt="Team Member 2">
+                <h3>Gemini G</h3>
+                <p>Security</p>
+            </div>
+            <div class="team-member">
+                <img src="balu.jpg" alt="Team Member 2">
+                <h3>Balaji C S</h3>
+                <p>DevScope</p>
+            </div>
+            <div class="team-member">
+                <img src="Ashuthosh[1].jpg" alt="Team Member 2">
+                <h3>Ashuthosha</h3>
+                <p>Deployment</p>
+            </div>
+        </div>
+    </section>
+    <div style="background-color: purple; padding:20px;text-align:center;font-size:20px;">
+        <p style="color:white">Made with love <span style="color:red;">❤</span> by Project-K</p>
+    </div>
+
+    <script>
+        window.addEventListener("scroll", function () {
+            let header = document.querySelector("header");
+            header.classList.toggle("scrolled", window.scrollY > 50);
+        });
+    </script>
+    <script>
+        document.querySelectorAll(".faq-item").forEach(item => {
+            item.addEventListener("click", () => {
+                item.classList.toggle("active");
+            });
+    
+            // Close the FAQ when the cursor moves out
+            item.addEventListener("mouseleave", () => {
+                item.classList.remove("active");
+            });
+        });
+    </script>
+    
+    
+
+</body>
+</html>
+
+
